@@ -174,9 +174,10 @@ function dot_to_iobuffer(dot)
     return io
 end
 
+using Graphviz_jll
+
 function run_dot(output::IO, input::IO, options)
-    cmd = getcmd(:dot)
-    cmd = `$cmd -Gfontname=monospace -Nfontname=monospace -Efontname=monospace $options`
+    cmd = `$(dot()) -Gfontname=monospace -Nfontname=monospace -Efontname=monospace $options`
     @debug "Run: $cmd"
     run(pipeline(cmd, stdout = output, stderr = stderr, stdin = input))
     return
